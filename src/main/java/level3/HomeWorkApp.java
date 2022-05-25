@@ -8,7 +8,7 @@ public class HomeWorkApp {
     public static void main(String[] args) {
 
         //задание 1
-        creatArray();
+        creatArray1();
 
         //задание 2
         creatArray2();
@@ -20,15 +20,11 @@ public class HomeWorkApp {
         creatArray4();
 
         //задание 5
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Введите длину массива: ");
-        int len = sc.nextInt();
-        System.out.println("Введите любое число: ");
-        int initialValue = sc.nextInt();
+        int len = getNumFromScanner("Введите длину массива: ");
+        int initialValue = getNumFromScanner("Введите любое целое число: ");
         int[] nums1 = creatArray5(len, initialValue);
         System.out.println(Arrays.toString(nums1));
         System.out.println();
-        sc.close();
 
         //задание 6
         creatArray6();
@@ -37,15 +33,14 @@ public class HomeWorkApp {
         int[] nums2 = {2, 2, 2, 1, 2, 2, 10, 1};
         if (checkBalance(nums2)) {
             System.out.println("Массив " + Arrays.toString(nums2) + " прошел проверку");
-        }
-        else {
+        } else {
             System.out.println("Массив " + Arrays.toString(nums2) + " не прошел проверку");
         }
         System.out.println();
 
         //задание 8 - положительное число
-        int n1 = 3;
-        int[] nums3 = {3, 5, 6, 1, 2 };
+        int n1 = 8;
+        int[] nums3 = {3, 5, 6, 1, 2};
         System.out.println("Число n = " + n1);
         System.out.println("Исходный массив " + Arrays.toString(nums3));
 
@@ -66,16 +61,26 @@ public class HomeWorkApp {
 
     }
 
+    private static int getNumFromScanner(String task) {
+        Scanner in = new Scanner(System.in);
+        while (true){
+            System.out.print(task);
+            if (in.hasNextInt()) {
+                return in.nextInt();
+            }
+        }
+    }
+
+
     /*1. Задать целочисленный массив, состоящий из элементов 0 и 1.
     Например: [ 1, 1, 0, 0, 1, 0, 1, 1, 0, 0 ]. С помощью цикла и условия заменить 0 на 1, 1 на 0
     */
-    private static void creatArray() {
-        int[] nums = { 1, 1, 0, 0, 1, 0, 1, 1, 0, 0 };
-        for(int i = 0; i < nums.length; i++) {
+    private static void creatArray1() {
+        int[] nums = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0};
+        for (int i = 0; i < nums.length; i++) {
             if (nums[i] == 0) {
                 nums[i] = 1;
-            }
-            else if (nums[i] == 1) {
+            } else if (nums[i] == 1) {
                 nums[i] = 0;
             }
         }
@@ -88,8 +93,8 @@ public class HomeWorkApp {
     */
     private static void creatArray2() {
         int[] nums = new int[100];
-        for(int i = 0; i < nums.length; i++) {
-            nums[i] = i+1;
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = i + 1;
         }
         System.out.println(Arrays.toString(nums));
         System.out.println();
@@ -99,9 +104,9 @@ public class HomeWorkApp {
     и числа меньшие 6 умножить на 2
     */
     private static void creatArray3() {
-        int[] nums = { 1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1 };
-        for(int i = 0; i < nums.length; i++) {
-            if (nums[i] < 6 ) {
+        int[] nums = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] < 6) {
                 nums[i] *= 2;
             }
         }
@@ -122,10 +127,9 @@ public class HomeWorkApp {
         int[][] table = new int[5][5];
         for (int i = 0; i < table.length; i++) {
             for (int j = 0; j < table.length; j++) {
-                if (i==j) {
+                if (i == j || i == (table.length - 1 - j)) {
                     table[i][j] = 1;
-                }
-                else {
+                } else {
                     table[i][j] = 0;
                 }
                 System.out.print(table[i][j] + " ");
@@ -141,7 +145,7 @@ public class HomeWorkApp {
     */
     private static int[] creatArray5(int len, int initialValue) {
         int[] nums = new int[len];
-        for(int i = 0; i < len; i++) {
+        for (int i = 0; i < len; i++) {
             nums[i] = initialValue;
         }
         return nums;
@@ -151,10 +155,10 @@ public class HomeWorkApp {
      и максимальный элементы
     */
     private static void creatArray6() {
-        int[] nums = {1, 5, 3, 9, 4, 6 , 8 , 10, 0, -1};
+        int[] nums = {1, 5, 3, 9, 4, 6, 8, 10, 0, -1};
         int intMin = nums[0];
         int intMax = nums[0];
-        for(int i = 1; i < nums.length; i++) {
+        for (int i = 1; i < nums.length; i++) {
             if (intMin > nums[i]) {
                 intMin = nums[i];
             }
@@ -187,7 +191,7 @@ public class HomeWorkApp {
             return false;
         }
 
-        for(int i = 0; i < nums.length; i++) {
+        for (int i = 0; i < nums.length; i++) {
             sumLeft += nums[i];
             borderLineLeft += ", " + nums[i];
             sumRight = 0;
@@ -205,12 +209,11 @@ public class HomeWorkApp {
 
             System.out.println("Сумма левой части: " + sumLeft);
             System.out.println("Сумма правой части: " + sumRight);
-            System.out.println("Граница массива: {" + borderLineLeft + "|||" + borderLineRight  + "}");
+            System.out.println("Граница массива: {" + borderLineLeft + "|||" + borderLineRight + "}");
 
             return true;
 
-        }
-        else {
+        } else {
             return false;
         }
 
@@ -225,34 +228,50 @@ public class HomeWorkApp {
     */
     private static int[] creatArray8(int[] nums, int n) {
 
-        int temp;
+        int temp, offset;
         int[] numsClone = nums.clone(); //клонирую чисто, чтобы не портить массив nums и возвращаю numsClone
 
         if (n > 0) {
-            for (int i = 0; i < n; i++) {
+
+            offset = calcOffset(numsClone.length, n);
+            for (int i = 0; i < offset; i++) {
                 temp = numsClone[0];
                 for (int j = 1; j < numsClone.length; j++) {
                     numsClone[j - 1] = numsClone[j];
                 }
                 numsClone[numsClone.length - 1] = temp;
             }
-        }
+        } else {
 
-        else {
-
-            n *= -1;  //делаем n положительным
-            for (int i = 0; i < n; i++) {
+            offset = calcOffset(numsClone.length, n*=-1);
+            for (int i = 0; i < offset; i++) {
                 temp = numsClone[numsClone.length - 1];
                 for (int j = numsClone.length - 1; j > 0; j--) {
                     numsClone[j] = numsClone[j - 1];
+                }
+                numsClone[0] = temp;
             }
-            numsClone[0] = temp;
-           }
 
         }
 
         return numsClone;
 
+    }
+
+    private static int calcOffset(int len, int n) {
+
+        int offset = n;
+
+        //вычисляем смещение правильно
+        //допустим длина массива 10, а ввели смещение 15 - > должны получить смещение 5
+        if (offset > len) {
+            while (offset >= len) {
+                offset = offset - len;
+            }
+            System.out.println("Количество смещений, которые надо выполнить: " + offset);
+        }
+
+        return offset;
     }
 
 }
